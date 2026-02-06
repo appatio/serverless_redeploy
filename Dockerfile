@@ -104,6 +104,9 @@ RUN comfy-node-install \
 RUN cd /comfyui/custom_nodes && \
     git clone https://github.com/princepainter/ComfyUI-PainterI2Vadvanced.git
 
+RUN cd /comfyui/custom_nodes && \
+    git clone https://github.com/princepainter/ComfyUI-PainterLongVideo.git
+
 # RUN cd /comfyui/custom_nodes && \
 #     git clone https://github.com/ashtar1984/
 # RUN cd /comfyui/custom_nodes && \
