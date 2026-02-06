@@ -25,6 +25,7 @@ RUN apt-get update && apt-get install -y \
     python3.12-venv \
     git \
     wget \
+    build-essential \
     libgl1 \
     libglib2.0-0 \
     libsm6 \
@@ -33,6 +34,7 @@ RUN apt-get update && apt-get install -y \
     ffmpeg \
     && ln -sf /usr/bin/python3.12 /usr/bin/python \
     && ln -sf /usr/bin/pip3 /usr/bin/pip
+
 
 # Clean up to reduce image size
 RUN apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
@@ -45,6 +47,8 @@ RUN wget -qO- https://astral.sh/uv/install.sh | sh \
 
 # Use the virtual environment for all subsequent commands
 ENV PATH="/opt/venv/bin:${PATH}"
+ENV CC=gcc
+ENV CXX=g++
 
 # Install comfy-cli + dependencies needed by it to install ComfyUI
 RUN uv pip install comfy-cli pip setuptools wheel
