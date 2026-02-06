@@ -61,6 +61,8 @@ RUN if [ "$ENABLE_PYTORCH_UPGRADE" = "true" ]; then \
       uv pip install --force-reinstall torch torchvision torchaudio --index-url ${PYTORCH_INDEX_URL}; \
     fi
 
+RUN uv pip install sageattention
+
 # Change working directory to ComfyUI
 WORKDIR /comfyui
 
@@ -81,7 +83,22 @@ RUN chmod +x /start.sh
 COPY scripts/comfy-node-install.sh /usr/local/bin/comfy-node-install
 RUN chmod +x /usr/local/bin/comfy-node-install
 
-RUN comfy-node-install comfyui_fill-nodes comfyui-videohelpersuite comfyui-find-perfect-resolution comfyui-tooling-nodes ComfyUI-PainterI2V ComfyUI_Text_Translation comfyui-kjnodes
+RUN comfy-node-install \
+    comfyui_fill-nodes \
+    comfyui-videohelpersuite \
+    comfyui-find-perfect-resolution \
+    comfyui-tooling-nodes \
+    ComfyUI-PainterI2V \
+    ComfyUI_Text_Translation \
+    comfyui-kjnodes \
+    ComfyUI-GGUF \
+    rgthree-comfy \
+    RES4LYF \
+    seedvr2_videoupscaler
+    
+RUN cd /comfyui/custom_nodes && \
+    git clone https://github.com/princepainter/ComfyUI-PainterI2Vadvanced.git
+
 # RUN cd /comfyui/custom_nodes && \
 #     git clone https://github.com/ashtar1984/
 # RUN cd /comfyui/custom_nodes && \
