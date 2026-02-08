@@ -12,7 +12,7 @@ echo "worker-comfyui: Starting ComfyUI"
 # Allow operators to tweak verbosity; default is DEBUG.
 : "${COMFY_LOG_LEVEL:=DEBUG}"
 
-# Serve the API and don't shutdown the container
+# Serve the API and don't shutdown the container + highvram
 if [ "$SERVE_API_LOCALLY" == "true" ]; then
     python -u /comfyui/main.py --disable-auto-launch --disable-metadata --listen --verbose "${COMFY_LOG_LEVEL}" --log-stdout &
 
