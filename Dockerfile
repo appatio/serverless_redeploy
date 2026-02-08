@@ -88,7 +88,6 @@ RUN chmod +x /start.sh
 COPY scripts/comfy-node-install.sh /usr/local/bin/comfy-node-install
 RUN chmod +x /usr/local/bin/comfy-node-install
 
-# Install nodes from registry
 RUN comfy-node-install \
     comfyui_fill-nodes \
     comfyui-videohelpersuite \
