@@ -78,7 +78,9 @@ ADD src/extra_model_paths.yaml ./
 WORKDIR /
 
 # Install Python runtime dependencies for the handler
-RUN uv pip install runpod requests websocket-client
+RUN uv pip install runpod requests websocket-client \
+ && uv cache clean || true \
+ && rm -rf /root/.cache/pip /root/.cache/uv /root/.cache/huggingface /root/.cache/torch
 
 # Add application code and scripts
 ADD src/start.sh handler.py test_input.json ./
@@ -101,13 +103,16 @@ RUN comfy-node-install \
     rgthree-comfy \
     RES4LYF \
     seedvr2_videoupscaler \
-    comfyui-easy-use
-    
-RUN cd /comfyui/custom_nodes && \
-    git clone https://github.com/princepainter/ComfyUI-PainterI2Vadvanced.git
+    comfyui-easy-use \
+ && uv cache clean || true \
+ && rm -rf /root/.cache/pip /root/.cache/uv /root/.cache/huggingface /root/.cache/torch
 
 RUN cd /comfyui/custom_nodes && \
+    git clone https://github.com/princepainter/ComfyUI-PainterI2Vadvanced.git && \
     git clone https://github.com/princepainter/ComfyUI-PainterLongVideo.git
+
+RUN uv cache clean || true \
+ && rm -rf /root/.cache/pip /root/.cache/uv /root/.cache/huggingface /root/.cache/torch
 
 # RUN cd /comfyui/custom_nodes && \
 #     git clone https://github.com/ashtar1984/
