@@ -99,7 +99,8 @@ RUN comfy-node-install \
     ComfyUI-GGUF \
     rgthree-comfy \
     RES4LYF \
-    seedvr2_videoupscaler
+    seedvr2_videoupscaler \
+    comfyui-easy-use
     
 RUN cd /comfyui/custom_nodes && \
     git clone https://github.com/princepainter/ComfyUI-PainterI2Vadvanced.git
